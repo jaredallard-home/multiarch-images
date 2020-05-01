@@ -1,0 +1,23 @@
+images:
+  # All repos must be in the form of their import paths.
+  external-attacher:
+    name: csi-attacher
+    version: v2.1.0
+    repo: github.com/kubernetes-csi/external-attacher
+  external-snapshotter:
+    name: csi-snapshotter
+    version: v1.2.2
+    repo: github.com/kubernetes-csi/external-snapshotter
+  external-resizer:
+    name: csi-resizer
+    version: v0.4.0
+    repo: github.com/kubernetes-csi/external-resizer
+  node-driver-registrar:
+    name: csi-node-driver-registrar
+    version: v1.2.0
+    repo: github.com/kubernetes-csi/node-driver-registrar
+  ceph-csi:
+    name: cephcsi
+    version: v2.1.0
+    repo: github.com/ceph/ceph-csi
+  
