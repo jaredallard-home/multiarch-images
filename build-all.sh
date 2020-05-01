@@ -35,6 +35,12 @@ for image in "${images[@]}"; do
     popd >/dev/null || exit 1
   fi
 
+  echo "INFO: checking out $version"
+  pushd "/tmp/$image" >/dev/null || exit 1
+  git checkout "$version"
+  popd >/dev/null || exit 1
+
+  # copy our Dockerfile over an overwrite a previously existing one, if it exists
   cp "$image/Dockerfile" "/tmp/$image/Dockerfile"
 
   pushd "/tmp/$image" >/dev/null || exit 1
@@ -48,6 +54,5 @@ for image in "${images[@]}"; do
 
   echo "INFO: Building docker image"
   docker buildx build --platform "$platform" -t "$baserepo/$name:$version" --build-arg "VERSION=$version" -f Dockerfile --push .
-  docker rmi "$baserepo/$name:$version"
   popd >/dev/null || exit 1
 done
