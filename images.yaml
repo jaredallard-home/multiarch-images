@@ -22,5 +22,5 @@ images:
     repo: github.com/ceph/ceph-csi
   logdna-agent:
     name: logdna-agent
-    version: 1.6.2:v1.6.2
+    version: 1.6.2:v1.6.2-jaredallard.1
     repo: github.com/logdna/logdna-agent
