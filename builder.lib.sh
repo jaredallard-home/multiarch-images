@@ -36,6 +36,8 @@ build_image() {
   if [[ -n "$(awk -F ':' '{ print $2 }' <<< "$version")" ]]; then
     tag_version="$(awk -F ':' '{ print $2 }' <<< "$version")" 
     version="$(awk -F ':' '{ print $1 }' <<< "$version")"
+  else
+    tag_version="$version"
   fi
 
   if [[ ! -e "/tmp/$image" ]]; then
@@ -54,11 +56,9 @@ build_image() {
   popd >/dev/null || exit 1
 
   # copy our Dockerfile over an overwrite a previously existing one, if it exists
-  cp "$image/Dockerfile" "/tmp/$image/Dockerfile"
+  cp -v "$image/"* "$image/".[^.]* "/tmp/$image/" || true
 
   pushd "/tmp/$image" >/dev/null || exit 1
-  git checkout "$version"
-
   if [[ ! -e "go.mod" ]] && [[ "$language" == "go" ]]; then
     echo "INFO: JIT adding go module support"
     go mod init "$repo"
